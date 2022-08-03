@@ -1,1 +1,325 @@
-import a from"./data/words.json"assert{type:"json"};import b from"./functions/Lister.js";import c from"./constants/Symbols.js";let lw=a=>a.toLowerCase(),gotoHome=document.getElementById("goto-home"),searchbar=document.getElementById("searchbar"),searchForm=document.getElementById("search-form"),includingElement=document.getElementById("including"),startingElement=document.getElementById("starting"),endingElement=document.getElementById("ending"),rhymesElement=document.getElementById("rhymes-list");function load(){let e=JSON.parse(window.localStorage.getItem("favs")||"[]");searchbar.value="",includingElement.innerHTML="",startingElement.innerHTML="",endingElement.innerHTML="",rhymesElement.innerHTML="",document.getElementById("words").hidden=!0,document.getElementById("rhymes").hidden=!0,searchForm.style.borderBottom="none",searchForm.style.paddingBottom="0",searchForm.style.marginBottom="0",searchbar.addEventListener("input",()=>{""===searchbar.value?searchbar.parentElement.classList.contains("bordered")&&searchbar.parentElement.classList.remove("bordered"):searchbar.parentElement.classList.contains("bordered")||searchbar.parentElement.classList.add("bordered")}),searchForm.addEventListener("submit",a=>{a.preventDefault(),f(searchbar.value)});let d=document.getElementById("randomize");function f(D){let l=new b(D),E=l.including(),F=l.starting(),G=l.ending(),H=l.ryhme();for(let{word:L,phonetic:I}of(document.getElementById("words").hidden=!1,document.getElementById("rhymes").hidden=!1,searchForm.style.borderBottom="1px solid #3b3e41",searchForm.style.paddingBottom="30px",searchForm.style.marginBottom="30px",includingElement.innerHTML="",startingElement.innerHTML="",endingElement.innerHTML="",rhymesElement.innerHTML="",0===E.length&&(includingElement.textContent="Aucun mot correspondant."),0===F.length&&(startingElement.textContent="Aucun mot correspondant."),0===G.length&&(endingElement.textContent="Aucun mot correspondant."),0===H.words.length&&(rhymesElement.textContent="Aucune rime trouv\xe9e."),E.slice(0,50))){let m=document.createElement("div"),d=document.createElement("div"),s=document.createElement("h4"),t=document.createElement("p"),u=document.createElement("p"),f=document.createElement("i");s.innerText=I.map(a=>a.comp).join(""),t.textContent=L,u.textContent="[ "+I.map(a=>c[a.sound]).join("")+" ]",s.classList.add("word-content"),t.classList.add("original-word"),u.classList.add("phonems"),f.classList.add("fas"),f.classList.add("fa-heart"),d.classList.add("word-text-content"),m.classList.add("word-details"),e.findIndex(a=>a.word===I.map(a=>a.comp).join("")&&lw(a.baseWord)===lw(D))+1&&f.classList.add("red"),f.addEventListener("click",()=>{let a=e.findIndex(a=>a.word===I.map(a=>a.comp).join("")&&lw(a.baseWord)===lw(D));a+1?(f.classList.remove("red"),e.splice(a,1)):(f.classList.add("red"),e.push({word:I.map(a=>a.comp).join(""),date:Date.now(),type:1,baseWord:D})),window.localStorage.setItem("favs",JSON.stringify(e))}),d.append(s),d.append(t),d.append(u),m.append(d),m.append(f),includingElement.append(m)}for(let{word:M,phonetic:J}of F.slice(0,50)){let n=document.createElement("div"),g=document.createElement("div"),v=document.createElement("h4"),w=document.createElement("p"),x=document.createElement("p"),h=document.createElement("i");v.innerText=J.map(a=>a.comp).join(""),w.textContent=M,x.textContent="[ "+J.map(a=>c[a.sound]).join("")+" ]",v.classList.add("word-content"),w.classList.add("original-word"),x.classList.add("phonems"),h.classList.add("fas"),h.classList.add("fa-heart"),g.classList.add("word-text-content"),n.classList.add("word-details"),e.findIndex(a=>a.word===J.map(a=>a.comp).join("")&&lw(a.baseWord)===lw(D))+1&&h.classList.add("red"),h.addEventListener("click",()=>{let a=e.findIndex(a=>a.word===J.map(a=>a.comp).join("")&&lw(a.baseWord)===lw(D));a+1?(h.classList.remove("red"),e.splice(a,1)):(h.classList.add("red"),e.push({word:J.map(a=>a.comp).join(""),date:Date.now(),type:1,baseWord:D})),window.localStorage.setItem("favs",JSON.stringify(e))}),g.append(v),g.append(w),g.append(x),n.append(g),n.append(h),startingElement.append(n)}for(let{word:N,phonetic:K}of G.slice(0,50)){let o=document.createElement("div"),i=document.createElement("div"),y=document.createElement("h4"),z=document.createElement("p"),A=document.createElement("p"),j=document.createElement("i");y.innerText=K.map(a=>a.comp).join(""),z.textContent=N,A.textContent="[ "+K.map(a=>c[a.sound]).join("")+" ]",y.classList.add("word-content"),z.classList.add("original-word"),A.classList.add("phonems"),j.classList.add("fas"),j.classList.add("fa-heart"),i.classList.add("word-text-content"),o.classList.add("word-details"),e.findIndex(a=>a.word===K.map(a=>a.comp).join("")&&lw(a.baseWord)===lw(D))+1&&j.classList.add("red"),j.addEventListener("click",()=>{let a=e.findIndex(a=>a.word===K.map(a=>a.comp).join("")&&lw(a.baseWord)===lw(D));a+1?(j.classList.remove("red"),e.splice(a,1)):(j.classList.add("red"),e.push({word:K.map(a=>a.comp).join(""),date:Date.now(),type:1,baseWord:D})),window.localStorage.setItem("favs",JSON.stringify(e))}),i.append(y),i.append(z),i.append(A),o.append(i),o.append(j),endingElement.append(o)}for(let{word:P,phonetic:a}of H.words){let p=document.createElement("div"),q=document.createElement("div"),B=document.createElement("h4"),C=document.createElement("p"),k=document.createElement("i"),r=!1;"NPH"===a[a.length-1].sound&&(r=!0),B.innerHTML=a.slice(0,-(1+r)).map(a=>a.comp).join("")+'<span style="text-decoration: underline;">'+a[a.length-(1+r)].comp+"</span>"+(r?a[a.length-1].comp:""),C.textContent="[ "+a.map(a=>c[a.sound]).join("")+" ]",B.classList.add("word-content"),C.classList.add("phonems"),k.classList.add("fas"),k.classList.add("fa-heart"),q.classList.add("word-text-content"),p.classList.add("word-details"),e.findIndex(b=>b.word===a.map(a=>a.comp).join("")&&lw(b.baseWord)===lw(D))+1&&k.classList.add("red"),k.addEventListener("click",()=>{let b=e.findIndex(b=>b.word===a.map(a=>a.comp).join("")&&lw(b.baseWord)===lw(D));b+1?(k.classList.remove("red"),e.splice(b,1)):(k.classList.add("red"),e.push({word:P,date:Date.now(),type:2,baseWord:D})),window.localStorage.setItem("favs",JSON.stringify(e))}),q.append(B),q.append(C),p.append(q),p.append(k),rhymesElement.append(p)}for(let O of document.getElementsByClassName("word"))O.innerHTML=D;searchbar.blur(),searchbar.parentElement.classList.contains("bordered")&&searchbar.parentElement.classList.remove("bordered")}d.addEventListener("click",()=>{let{word:b}=a[Math.floor(Math.random()*a.length)];searchbar.value=b,f(b)})}load(),gotoHome.addEventListener("click",load)
+import words from "./data/words.json" assert { type: "json" }
+import Lister from "./functions/Lister.js";
+import Symbols from "./constants/Symbols.js";
+
+const lw = (s) => s.toLowerCase();
+
+const gotoHome = document.getElementById("goto-home");
+const searchbar = document.getElementById("searchbar");
+const searchForm = document.getElementById("search-form");
+const includingElement = document.getElementById("including");
+const startingElement = document.getElementById("starting");
+const endingElement = document.getElementById("ending");
+const rhymesElement = document.getElementById("rhymes-list");
+
+function load() {
+  const favs = JSON.parse(window.localStorage.getItem("favs") || "[]");
+
+  searchbar.value = "";
+  includingElement.innerHTML = "";
+  startingElement.innerHTML = "";
+  endingElement.innerHTML = "";
+  rhymesElement.innerHTML = "";
+
+  document.getElementById("words").hidden = true;
+  document.getElementById("rhymes").hidden = true;
+
+  searchForm.style.borderBottom = "none";
+  searchForm.style.paddingBottom = "0";
+  searchForm.style.marginBottom = "0";
+
+  searchbar.addEventListener("input", () => {
+    if (searchbar.value === "") {
+      if (searchbar.parentElement.classList.contains("bordered")) {
+        searchbar.parentElement.classList.remove("bordered");
+      }
+    } else {
+      if (!searchbar.parentElement.classList.contains("bordered")) {
+        searchbar.parentElement.classList.add("bordered");
+      }
+    }
+  });
+  
+  
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    search(searchbar.value);
+  });
+  
+  const randomize = document.getElementById("randomize");
+  randomize.addEventListener("click", () => {
+    const { word } = words[Math.floor(Math.random() * words.length)];
+    searchbar.value = word;
+    search(word);
+  });
+  
+  function search(baseWord) {
+    const lister = new Lister(baseWord);
+  
+    const including = lister.including();
+    const starting = lister.starting();
+    const ending = lister.ending();
+    const rhymes = lister.ryhme();
+
+    document.getElementById("words").hidden = false;
+    document.getElementById("rhymes").hidden = false;
+
+    searchForm.style.borderBottom = "1px solid #3b3e41";
+    searchForm.style.paddingBottom = "30px";
+    searchForm.style.marginBottom = "30px";
+
+    includingElement.innerHTML = "";
+    startingElement.innerHTML = "";
+    endingElement.innerHTML = "";
+    rhymesElement.innerHTML = "";
+  
+    if (including.length === 0) {
+      includingElement.textContent = "Aucun mot correspondant.";
+    }
+    if (starting.length === 0) {
+      startingElement.textContent = "Aucun mot correspondant.";
+    }
+    if (ending.length === 0) {
+      endingElement.textContent = "Aucun mot correspondant.";
+    }
+    if (rhymes.words.length === 0) {
+      rhymesElement.textContent = "Aucune rime trouvée.";
+    }
+  
+    for (const { word, phonetic } of including.slice(0, 50)) {
+      const wordElement = document.createElement("div");
+      const textContent = document.createElement("div");
+      const wordText = document.createElement("h4");
+      const originalWord = document.createElement("p");
+      const phonems = document.createElement("p");
+      const heart = document.createElement("i");
+      
+      wordText.innerText = phonetic.map((s) => s.comp).join("");
+      originalWord.textContent = word;
+      phonems.textContent = "[ " + phonetic.map((s) => Symbols[s.sound]).join("") + " ]";
+  
+      wordText.classList.add("word-content");
+      originalWord.classList.add("original-word");
+      phonems.classList.add("phonems");
+      heart.classList.add("fas");
+      heart.classList.add("fa-heart");
+      textContent.classList.add("word-text-content");
+      wordElement.classList.add("word-details");
+      if (favs.findIndex((x) => 
+          x.word === phonetic.map((s) => s.comp).join("") &&
+          lw(x.baseWord) === lw(baseWord)
+      ) + 1) {
+        heart.classList.add("red");
+      }
+  
+      heart.addEventListener("click", () => {
+        const wi = favs.findIndex((x) => 
+          x.word === phonetic.map((s) => s.comp).join("") &&
+          lw(x.baseWord) === lw(baseWord)
+        );
+        if (wi + 1) {
+          heart.classList.remove("red");
+          favs.splice(wi, 1);
+        } else {
+          heart.classList.add("red");
+          favs.push({
+            word: phonetic.map((s) => s.comp).join(""),
+            date: Date.now(),
+            type: 1,
+            baseWord
+          });
+        }
+  
+        window.localStorage.setItem("favs", JSON.stringify(favs));
+      });
+  
+      textContent.append(wordText);
+      textContent.append(originalWord);
+      textContent.append(phonems);
+      wordElement.append(textContent);
+      wordElement.append(heart);
+      includingElement.append(wordElement);
+    }
+  
+    for (const { word, phonetic } of starting.slice(0, 50)) {
+      const wordElement = document.createElement("div");
+      const textContent = document.createElement("div");
+      const wordText = document.createElement("h4");
+      const originalWord = document.createElement("p");
+      const phonems = document.createElement("p");
+      const heart = document.createElement("i");
+      
+      wordText.innerText = phonetic.map((s) => s.comp).join("");
+      originalWord.textContent = word;
+      phonems.textContent = "[ " + phonetic.map((s) => Symbols[s.sound]).join("") + " ]";
+  
+      wordText.classList.add("word-content");
+      originalWord.classList.add("original-word");
+      phonems.classList.add("phonems");
+      heart.classList.add("fas");
+      heart.classList.add("fa-heart");
+      textContent.classList.add("word-text-content");
+      wordElement.classList.add("word-details");
+      if (favs.findIndex((x) => 
+        x.word === phonetic.map((s) => s.comp).join("") &&
+        lw(x.baseWord) === lw(baseWord)
+      ) + 1) {
+        heart.classList.add("red");
+      }
+  
+      heart.addEventListener("click", () => {
+        const wi = favs.findIndex((x) => 
+          x.word === phonetic.map((s) => s.comp).join("") &&
+          lw(x.baseWord) === lw(baseWord)
+        );
+        if (wi + 1) {
+          heart.classList.remove("red");
+          favs.splice(wi, 1);
+        } else {
+          heart.classList.add("red");
+          favs.push({
+            word: phonetic.map((s) => s.comp).join(""),
+            date: Date.now(),
+            type: 1,
+            baseWord
+          });
+        }
+  
+        window.localStorage.setItem("favs", JSON.stringify(favs));
+      });
+  
+      textContent.append(wordText);
+      textContent.append(originalWord);
+      textContent.append(phonems);
+      wordElement.append(textContent);
+      wordElement.append(heart);
+      startingElement.append(wordElement);
+    }
+  
+    for (const { word, phonetic } of ending.slice(0, 50)) {
+      const wordElement = document.createElement("div");
+      const textContent = document.createElement("div");
+      const wordText = document.createElement("h4");
+      const originalWord = document.createElement("p");
+      const phonems = document.createElement("p");
+      const heart = document.createElement("i");
+      
+      wordText.innerText = phonetic.map((s) => s.comp).join("");
+      originalWord.textContent = word;
+      phonems.textContent = "[ " + phonetic.map((s) => Symbols[s.sound]).join("") + " ]";
+  
+      wordText.classList.add("word-content");
+      originalWord.classList.add("original-word");
+      phonems.classList.add("phonems");
+      heart.classList.add("fas");
+      heart.classList.add("fa-heart");
+      textContent.classList.add("word-text-content");
+      wordElement.classList.add("word-details");
+      if (favs.findIndex((x) => 
+        x.word === phonetic.map((s) => s.comp).join("") &&
+        lw(x.baseWord) === lw(baseWord)
+      ) + 1) {
+        heart.classList.add("red");
+      }
+  
+      heart.addEventListener("click", () => {
+        const wi = favs.findIndex((x) => 
+          x.word === phonetic.map((s) => s.comp).join("") &&
+          lw(x.baseWord) === lw(baseWord)
+        );
+        if (wi + 1) {
+          heart.classList.remove("red");
+          favs.splice(wi, 1);
+        } else {
+          heart.classList.add("red");
+          favs.push({
+            word: phonetic.map((s) => s.comp).join(""),
+            date: Date.now(),
+            type: 1,
+            baseWord
+          });
+        }
+  
+        window.localStorage.setItem("favs", JSON.stringify(favs));
+      });
+  
+      textContent.append(wordText);
+      textContent.append(originalWord);
+      textContent.append(phonems);
+      wordElement.append(textContent);
+      wordElement.append(heart);
+      endingElement.append(wordElement);
+    }
+  
+    for (const { word, phonetic } of rhymes.words) {
+      const wordElement = document.createElement("div");
+      const textContent = document.createElement("div");
+      const wordText = document.createElement("h4");
+      const phonems = document.createElement("p");
+      const heart = document.createElement("i");
+  
+      let cleanPhonetic = false
+      if (phonetic[phonetic.length - 1].sound === "NPH") cleanPhonetic = true;
+      
+      wordText.innerHTML = 
+        phonetic.slice(0, - (1 + cleanPhonetic)).map((x) => x.comp).join("") +
+        "<span style=\"text-decoration: underline;\">" +
+        phonetic[phonetic.length - (1 + cleanPhonetic)].comp +
+        "</span>" + 
+        (
+          cleanPhonetic ?
+          phonetic[phonetic.length - 1].comp:
+          ""
+        )
+  
+      phonems.textContent = "[ " + phonetic.map((s) => Symbols[s.sound]).join("") + " ]";
+  
+      wordText.classList.add("word-content");
+      phonems.classList.add("phonems");
+      heart.classList.add("fas");
+      heart.classList.add("fa-heart");
+      textContent.classList.add("word-text-content");
+      wordElement.classList.add("word-details");
+      if (favs.findIndex((x) => 
+        x.word === phonetic.map((s) => s.comp).join("") &&
+        lw(x.baseWord) === lw(baseWord)
+      ) + 1) {
+        heart.classList.add("red");
+      }
+  
+      heart.addEventListener("click", () => {
+        const wi = favs.findIndex((x) => 
+          x.word === phonetic.map((s) => s.comp).join("") &&
+          lw(x.baseWord) === lw(baseWord)
+        );
+        if (wi + 1) {
+          heart.classList.remove("red");
+          favs.splice(wi, 1);
+        } else {
+          heart.classList.add("red");
+          favs.push({ word, date: Date.now(), type: 2, baseWord });
+        }
+  
+        window.localStorage.setItem("favs", JSON.stringify(favs));
+      });
+  
+      textContent.append(wordText);
+      textContent.append(phonems);
+      wordElement.append(textContent);
+      wordElement.append(heart);
+      rhymesElement.append(wordElement);
+    }
+    
+    for (const element of document.getElementsByClassName("word")) {
+      element.innerHTML = baseWord;
+    }
+  
+    searchbar.blur();
+    if (searchbar.parentElement.classList.contains("bordered")) {
+      searchbar.parentElement.classList.remove("bordered");
+    }
+  }
+}
+
+load();
+gotoHome.addEventListener("click", load);

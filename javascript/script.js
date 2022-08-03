@@ -1,1 +1,24 @@
-const gotoHome=document.getElementById("goto-home"),gotoFavs=document.getElementById("goto-favs"),pages=[document.getElementById("main-content"),document.getElementById("favs-content")],Pages={HOME:0,FAVS:1};gotoHome.addEventListener("click",()=>{for(let a in pages)pages[a].hidden=!0;pages[Pages.HOME].hidden=!1,window.history.pushState({},"","/")}),gotoFavs.addEventListener("click",()=>{for(let a in pages)pages[a].hidden=!0;pages[Pages.FAVS].hidden=!1,window.history.pushState({},"","/favorites")})
+const gotoHome = document.getElementById("goto-home");
+const gotoFavs = document.getElementById("goto-favs");
+
+const pages = [
+  document.getElementById("main-content"),
+  document.getElementById("favs-content")
+]
+
+const Pages = {
+  HOME: 0,
+  FAVS: 1
+}
+
+gotoHome.addEventListener("click", () => {
+  for (const i in pages) pages[i].hidden = true;
+  pages[Pages.HOME].hidden = false;
+  window.history.pushState({}, "", "/");
+});
+
+gotoFavs.addEventListener("click", () => {
+  for (const i in pages) pages[i].hidden = true;
+  pages[Pages.FAVS].hidden = false;
+  window.history.pushState({}, "", "/favorites");
+});

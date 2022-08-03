@@ -1,1 +1,44 @@
-import a from"../constants/Phonems.js";export default class b{constructor(){}phonems(b){b+="\n";let c=[];return Object.entries(a).forEach(([e,a])=>{let d=[...b.matchAll(a)];c=[...c,...d.map(a=>({i:a.index,s:a[0],k:e}))]}),c.sort((a,b)=>a.i-b.i).map(a=>({sound:a.k,comp:a.s}))}syllabes(d){let e=this.phonems(d),b=[],a={sound:[],comp:""};for(let c of e)a.sound.push(c.sound),a.comp+=c.comp,"V"===c.sound[2]&&(b.push(a),a={sound:[],comp:""});return a.sound.length>0&&b.push(a),b}}
+import Phonems from "../constants/Phonems.js";
+
+/* Translator class for editing word terms */
+export default class Translator {
+  constructor() {}
+
+  /* 
+  Discompose the word with phonetics tags in the file '/JavaScript/Constants/Phonems'
+  */
+  phonems(data) {
+    data = data + "\n";
+    let all = []
+
+    Object.entries(Phonems).forEach(([key, value]) => {
+      const vals = [...data.matchAll(value)];
+      all = [...all, ...vals.map((d) => ({ i: d.index, s: d[0], k: key }))]
+    });
+
+    return all.sort((a, b) => a.i - b.i).map((x) => ({ sound: x.k, comp: x.s }));
+  }
+
+  /*
+  Discompose the word in syllabes
+  */
+  syllabes(data) {
+    const phonems = this.phonems(data);
+    const syllabes = []
+    let temp = { sound: [], comp: "" }
+
+    for (const phonem of phonems) {
+      temp.sound.push(phonem.sound);
+      temp.comp += phonem.comp;
+
+      if (phonem.sound[2] === "V") {
+        syllabes.push(temp);
+        temp = { sound: [], comp: "" }
+      }
+    }
+
+    if (temp.sound.length > 0) syllabes.push(temp);
+
+    return syllabes;
+  }
+}
